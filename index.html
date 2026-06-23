@@ -11,89 +11,160 @@
     --navy: #010131; --blue: #59BFFF; --blue-dim: rgba(89,191,255,0.15);
     --blue-border: rgba(89,191,255,0.3); --white: #e8f4ff;
     --muted: rgba(232,244,255,0.45); --win: #4ade80; --loss: #f87171;
+    --warn: #fbbf24;
     --win-bg: rgba(74,222,128,0.08); --loss-bg: rgba(248,113,113,0.08);
   }
   body { background: var(--navy); color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 16px; min-height: 100vh; padding: 40px 20px 80px; }
-  body::after { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(89,191,255,0.015) 4px); pointer-events:none; z-index:9999; }
+  body::after { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(89,191,255,0.012) 4px); pointer-events:none; z-index:9999; }
 
+  /* HEADER */
   header { text-align:center; margin-bottom:48px; }
   .logo-tag { font-family:'Orbitron',monospace; font-size:11px; font-weight:600; letter-spacing:.25em; color:var(--blue); text-transform:uppercase; margin-bottom:12px; }
-  h1 { font-family:'Orbitron',monospace; font-size:clamp(22px,4vw,36px); font-weight:900; color:var(--white); line-height:1.1; }
+  h1 { font-family:'Orbitron',monospace; font-size:clamp(22px,4vw,36px); font-weight:900; line-height:1.1; }
   h1 span { color:var(--blue); }
   .subtitle { margin-top:8px; color:var(--muted); font-size:15px; letter-spacing:.05em; }
 
+  /* FORM */
   .form-card { max-width:520px; margin:0 auto 48px; background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:4px; padding:32px; }
   .field { margin-bottom:20px; }
   .field:last-of-type { margin-bottom:28px; }
   label { display:block; font-family:'Orbitron',monospace; font-size:10px; font-weight:600; letter-spacing:.2em; color:var(--blue); text-transform:uppercase; margin-bottom:8px; }
   input[type="number"] { width:100%; background:rgba(1,1,49,0.8); border:1px solid var(--blue-border); border-radius:2px; color:var(--white); font-family:'Rajdhani',sans-serif; font-size:16px; font-weight:500; padding:12px 16px; outline:none; transition:border-color .2s; }
   input:focus { border-color:var(--blue); }
-  .hint { margin-top:6px; font-size:12px; color:var(--muted); letter-spacing:.03em; }
-
+  .hint { margin-top:6px; font-size:12px; color:var(--muted); }
   .btn-analyze { width:100%; background:var(--blue); border:none; border-radius:2px; color:var(--navy); cursor:pointer; font-family:'Orbitron',monospace; font-size:13px; font-weight:700; letter-spacing:.15em; padding:16px; text-transform:uppercase; transition:opacity .2s,transform .1s; }
   .btn-analyze:hover { opacity:.88; }
   .btn-analyze:active { transform:scale(.99); }
   .btn-analyze:disabled { opacity:.4; cursor:not-allowed; }
 
+  /* STATUS */
   #status { max-width:520px; margin:0 auto 32px; font-size:14px; color:var(--muted); text-align:center; min-height:20px; letter-spacing:.05em; }
   #status.error { color:var(--loss); }
 
-  #results { max-width:900px; margin:0 auto; display:none; }
+  /* RESULTS */
+  #results { max-width:960px; margin:0 auto; display:none; }
 
-  .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:12px; margin-bottom:32px; }
-  .stat-box { background:var(--blue-dim); border:1px solid var(--blue-border); border-radius:3px; padding:18px 16px; text-align:center; }
-  .stat-box .val { font-family:'Orbitron',monospace; font-size:24px; font-weight:900; color:var(--blue); line-height:1; }
-  .stat-box .val.win-color { color:var(--win); }
-  .stat-box .val.loss-color { color:var(--loss); }
-  .stat-box .lbl { margin-top:6px; font-size:11px; font-weight:600; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; }
+  /* SECTION TITLE */
+  .section-title { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; letter-spacing:.2em; color:var(--blue); text-transform:uppercase; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--blue-border); margin-top:40px; }
+  .section-title:first-child { margin-top:0; }
 
-  .tilt-alert { display:none; margin-bottom:24px; padding:16px 20px; border-radius:3px; font-size:14px; font-weight:600; letter-spacing:.04em; border-left:3px solid; }
-  .tilt-alert.danger  { background:rgba(248,113,113,0.1); border-color:var(--loss); color:var(--loss); display:block; }
-  .tilt-alert.warning { background:rgba(251,191,36,0.08); border-color:#fbbf24; color:#fbbf24; display:block; }
-  .tilt-alert.ok      { background:rgba(74,222,128,0.08); border-color:var(--win); color:var(--win); display:block; }
+  /* SUMMARY GRID */
+  .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(105px,1fr)); gap:10px; margin-bottom:8px; }
+  .stat-box { background:var(--blue-dim); border:1px solid var(--blue-border); border-radius:3px; padding:16px 12px; text-align:center; }
+  .stat-box .val { font-family:'Orbitron',monospace; font-size:22px; font-weight:900; color:var(--blue); line-height:1; }
+  .stat-box .lbl { margin-top:6px; font-size:10px; font-weight:600; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
 
-  .section-title { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; letter-spacing:.2em; color:var(--blue); text-transform:uppercase; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--blue-border); }
+  /* TILT ALERT */
+  .tilt-alert { margin:16px 0 8px; padding:16px 20px; border-radius:3px; font-size:14px; font-weight:600; letter-spacing:.03em; border-left:3px solid; line-height:1.5; }
+  .tilt-alert.danger  { background:rgba(248,113,113,0.1);  border-color:var(--loss); color:var(--loss); }
+  .tilt-alert.warning { background:rgba(251,191,36,0.08);  border-color:var(--warn); color:var(--warn); }
+  .tilt-alert.ok      { background:rgba(74,222,128,0.08);  border-color:var(--win);  color:var(--win); }
 
-  .champ-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-bottom:32px; }
-  .champ-card { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:14px 16px; }
-  .champ-name { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; color:var(--white); margin-bottom:8px; }
-  .champ-wr { font-family:'Orbitron',monospace; font-size:18px; font-weight:700; margin-bottom:4px; }
-  .champ-stats { font-size:13px; color:var(--muted); line-height:1.7; }
-  .champ-stats strong { color:var(--white); }
+  /* TABS */
+  .tabs { display:flex; gap:4px; margin-bottom:0; border-bottom:1px solid var(--blue-border); margin-top:40px; }
+  .tab-btn { background:none; border:none; border-bottom:2px solid transparent; color:var(--muted); cursor:pointer; font-family:'Orbitron',monospace; font-size:10px; font-weight:600; letter-spacing:.15em; padding:10px 18px; text-transform:uppercase; transition:color .2s,border-color .2s; margin-bottom:-1px; }
+  .tab-btn:hover { color:var(--white); }
+  .tab-btn.active { color:var(--blue); border-bottom-color:var(--blue); }
+  .tab-panel { display:none; padding-top:24px; }
+  .tab-panel.active { display:block; }
 
-  .match-list { display:flex; flex-direction:column; gap:8px; margin-bottom:40px; }
-  .match-row { display:grid; grid-template-columns:6px 120px 1fr auto auto auto auto; align-items:center; gap:14px; padding:14px 16px; border-radius:3px; border:1px solid transparent; font-size:14px; }
-  .match-row.win  { background:var(--win-bg);  border-color:rgba(74,222,128,0.2); }
-  .match-row.loss { background:var(--loss-bg); border-color:rgba(248,113,113,0.2); }
-  .match-pip { width:6px; height:6px; border-radius:50%; }
-  .match-row.win  .match-pip { background:var(--win); box-shadow:0 0 6px var(--win); }
-  .match-row.loss .match-pip { background:var(--loss); box-shadow:0 0 6px var(--loss); }
-  .match-champ { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--white); }
-  .match-result { font-weight:700; font-size:12px; letter-spacing:.1em; }
+  /* STREAK PIPS */
+  .streak-row { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+  .streak-pip { width:26px; height:26px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; font-family:'Orbitron',monospace; cursor:default; }
+  .streak-pip.W { background:rgba(74,222,128,0.2); color:var(--win); border:1px solid rgba(74,222,128,0.35); }
+  .streak-pip.L { background:rgba(248,113,113,0.12); color:var(--loss); border:1px solid rgba(248,113,113,0.28); }
+
+  /* LP CHART */
+  .chart-wrap { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:20px; margin-bottom:8px; }
+  canvas { width:100%; display:block; }
+
+  /* CHAMPION GRID */
+  .champ-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
+  .champ-card { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:16px; }
+  .champ-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+  .champ-name { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; color:var(--white); }
+  .champ-wr { font-family:'Orbitron',monospace; font-size:20px; font-weight:900; }
+  .champ-row { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:3px 0; border-bottom:1px solid rgba(89,191,255,0.06); }
+  .champ-row:last-child { border:none; }
+  .champ-row strong { color:var(--white); }
+
+  /* TILT PATTERN */
+  .tilt-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .tilt-card { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:18px; }
+  .tilt-card h4 { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; letter-spacing:.15em; color:var(--blue); text-transform:uppercase; margin-bottom:14px; }
+  .hour-bar-wrap { display:flex; flex-direction:column; gap:6px; }
+  .hour-bar-row { display:flex; align-items:center; gap:10px; font-size:12px; }
+  .hour-label { width:54px; color:var(--muted); flex-shrink:0; }
+  .hour-bar-bg { flex:1; background:rgba(89,191,255,0.08); border-radius:2px; height:14px; overflow:hidden; }
+  .hour-bar-fill { height:100%; border-radius:2px; transition:width .4s; }
+  .hour-stat { width:40px; text-align:right; color:var(--muted); font-size:11px; flex-shrink:0; }
+  .after-loss-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid rgba(89,191,255,0.06); font-size:13px; }
+  .after-loss-row:last-child { border:none; }
+  .after-loss-label { color:var(--muted); }
+  .after-loss-wr { font-family:'Orbitron',monospace; font-size:13px; font-weight:700; }
+
+  /* ADVANCED STATS */
+  .adv-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+  .adv-card { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:16px; }
+  .adv-card h4 { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; letter-spacing:.15em; color:var(--blue); text-transform:uppercase; margin-bottom:12px; }
+  .adv-val { font-family:'Orbitron',monospace; font-size:28px; font-weight:900; color:var(--white); line-height:1; }
+  .adv-sub { font-size:12px; color:var(--muted); margin-top:4px; }
+  .adv-bar-bg { margin-top:10px; background:rgba(89,191,255,0.1); border-radius:2px; height:4px; }
+  .adv-bar-fill { height:4px; border-radius:2px; }
+
+  /* ELO BENCHMARK */
+  .bench-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
+  .bench-card { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:16px; }
+  .bench-card h4 { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; letter-spacing:.15em; color:var(--blue); text-transform:uppercase; margin-bottom:12px; }
+  .bench-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(89,191,255,0.06); font-size:13px; }
+  .bench-row:last-child { border:none; }
+  .bench-metric { color:var(--muted); }
+  .bench-vals { display:flex; gap:16px; font-family:'Orbitron',monospace; font-size:12px; font-weight:700; }
+  .bench-you { color:var(--white); }
+  .bench-avg { color:var(--muted); font-weight:400; }
+  .bench-delta { font-size:11px; }
+  .bench-delta.pos { color:var(--win); }
+  .bench-delta.neg { color:var(--loss); }
+  .bench-delta.neu { color:var(--muted); }
+
+  /* MATCH LIST */
+  .match-list { display:flex; flex-direction:column; gap:6px; }
+  .match-row { display:grid; grid-template-columns:5px 100px auto 1fr auto auto auto auto; align-items:center; gap:12px; padding:12px 16px; border-radius:3px; border:1px solid transparent; font-size:13px; }
+  .match-row.win  { background:var(--win-bg);  border-color:rgba(74,222,128,0.18); }
+  .match-row.loss { background:var(--loss-bg); border-color:rgba(248,113,113,0.18); }
+  .match-pip { width:5px; height:5px; border-radius:50%; }
+  .match-row.win  .match-pip { background:var(--win); box-shadow:0 0 5px var(--win); }
+  .match-row.loss .match-pip { background:var(--loss); box-shadow:0 0 5px var(--loss); }
+  .match-champ { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; }
+  .match-result { font-weight:700; font-size:11px; letter-spacing:.1em; }
   .match-row.win  .match-result { color:var(--win); }
   .match-row.loss .match-result { color:var(--loss); }
+  .match-role { font-size:11px; color:var(--muted); background:rgba(89,191,255,0.08); border:1px solid var(--blue-border); border-radius:2px; padding:1px 6px; text-align:center; }
   .match-kda { color:var(--white); font-weight:600; }
   .match-cs, .match-dur { color:var(--muted); }
-  .match-ago { color:rgba(232,244,255,0.3); font-size:12px; text-align:right; }
+  .match-dmg { color:rgba(232,244,255,0.6); font-size:12px; }
+  .match-ago { color:rgba(232,244,255,0.28); font-size:11px; text-align:right; }
 
-  .lp-chart-wrap { background:rgba(89,191,255,0.04); border:1px solid var(--blue-border); border-radius:3px; padding:20px; margin-bottom:40px; }
-  canvas#lpChart { width:100%; height:180px; display:block; }
+  /* COACH SECTION */
+  .coach-block { background:rgba(89,191,255,0.05); border:1px solid var(--blue-border); border-radius:3px; padding:24px; margin-bottom:12px; }
+  .coach-block h3 { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--blue); letter-spacing:.15em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .coach-block h3 .badge { font-size:14px; }
+  .coach-item { padding:12px 0; border-bottom:1px solid rgba(89,191,255,0.07); }
+  .coach-item:last-child { border:none; padding-bottom:0; }
+  .coach-item-title { font-weight:700; color:var(--white); font-size:14px; margin-bottom:5px; display:flex; gap:8px; align-items:center; }
+  .coach-item-title .icon { font-size:16px; }
+  .coach-item-body { font-size:13px; color:rgba(232,244,255,0.7); line-height:1.65; }
 
-  .streak-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:32px; }
-  .streak-pip { width:28px; height:28px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; font-family:'Orbitron',monospace; }
-  .streak-pip.W { background:rgba(74,222,128,0.2); color:var(--win); border:1px solid rgba(74,222,128,0.4); }
-  .streak-pip.L { background:rgba(248,113,113,0.15); color:var(--loss); border:1px solid rgba(248,113,113,0.3); }
+  /* PRIORITY BADGE */
+  .prio { font-family:'Orbitron',monospace; font-size:9px; font-weight:700; letter-spacing:.1em; padding:2px 7px; border-radius:2px; text-transform:uppercase; }
+  .prio.high   { background:rgba(248,113,113,0.15); color:var(--loss); border:1px solid rgba(248,113,113,0.3); }
+  .prio.medium { background:rgba(251,191,36,0.12);  color:var(--warn); border:1px solid rgba(251,191,36,0.3); }
+  .prio.low    { background:rgba(74,222,128,0.1);   color:var(--win);  border:1px solid rgba(74,222,128,0.25); }
 
-  .advice-box { background:rgba(89,191,255,0.06); border:1px solid var(--blue-border); border-radius:3px; padding:24px; margin-bottom:32px; }
-  .advice-box h3 { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; color:var(--blue); letter-spacing:.15em; text-transform:uppercase; margin-bottom:14px; }
-  .advice-box ul { list-style:none; }
-  .advice-box li { padding:7px 0; font-size:14px; color:var(--white); border-bottom:1px solid rgba(89,191,255,0.08); display:flex; gap:10px; }
-  .advice-box li:last-child { border:none; }
-  .advice-box li::before { content:'›'; color:var(--blue); font-size:16px; flex-shrink:0; }
-
-  @media(max-width:600px) {
-    .match-row { grid-template-columns:6px 90px 1fr auto; }
-    .match-cs, .match-dur { display:none; }
+  @media(max-width:640px) {
+    .tilt-grid { grid-template-columns:1fr; }
+    .match-row { grid-template-columns:5px 80px 1fr auto; }
+    .match-role,.match-cs,.match-dur,.match-dmg { display:none; }
   }
 </style>
 </head>
@@ -102,7 +173,7 @@
 <header>
   <div class="logo-tag">AphinXSa · On Progresse Ensemble</div>
   <h1>Match <span>Analyzer</span></h1>
-  <p class="subtitle">Analyse ton historique ranked — champion par champion, game par game</p>
+  <p class="subtitle">Analyse avancée — champion, tilt, stats, benchmark elo</p>
 </header>
 
 <div class="form-card">
@@ -118,228 +189,546 @@
 <div id="results"></div>
 
 <script>
-  // ════════════════════════════════════════════════
-  //  CONFIG — modifie ces deux lignes uniquement
-  // ════════════════════════════════════════════════
-  const API_KEY   = 'RGAPI-46ae4afb-1e43-404b-8ae0-735476e528d7';
-  const GAME_NAME = 'AphinXSa';
-  const TAG_LINE  = 'Ahjin';
-  // ════════════════════════════════════════════════
+// ════════════════════════════════════════════════
+//  CONFIG
+// ════════════════════════════════════════════════
+const API_KEY   = 'RGAPI-46ae4afb-1e43-404b-8ae0-735476e528d7';
+const GAME_NAME = 'AphinXSa';
+const TAG_LINE  = 'Ahjin';
+// ════════════════════════════════════════════════
 
-  const RIOT_EU = 'https://europe.api.riotgames.com';
+// Benchmarks Emeraude (ADC) — moyennes approximatives tirées des stats publiques
+const EMERALD_BENCH = {
+  kda:      3.2,
+  csPerMin: 7.8,
+  vision:   21,
+  killParticipation: 62,   // %
+  damageShare:       26,   // % des dégâts d'équipe
+  dmgPerMin:        580,
+  deathsPer10:      2.8,
+};
 
-  async function fetchRiot(url) {
-    const res = await fetch(url, { headers: { 'X-Riot-Token': API_KEY } });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(`HTTP ${res.status} — ${err?.status?.message || 'Erreur API Riot'}`);
-    }
-    return res.json();
+const RIOT_EU = 'https://europe.api.riotgames.com';
+
+async function fetchRiot(url) {
+  const res = await fetch(url, { headers: { 'X-Riot-Token': API_KEY } });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(`HTTP ${res.status} — ${err?.status?.message || 'Erreur API'}`);
   }
+  return res.json();
+}
 
-  function setStatus(msg, isError = false) {
-    const el = document.getElementById('status');
-    el.textContent = msg;
-    el.className = isError ? 'error' : '';
-  }
+function setStatus(msg, isError = false) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = isError ? 'error' : '';
+}
 
-  function msToMin(ms) {
-    const s = Math.floor(ms / 1000);
-    return `${Math.floor(s / 60)}m${String(s % 60).padStart(2, '0')}s`;
-  }
+function msToMin(ms) {
+  const s = Math.floor(ms / 1000);
+  return `${Math.floor(s/60)}m${String(s%60).padStart(2,'0')}s`;
+}
 
-  function timeAgo(ts) {
-    const diff = Date.now() - ts;
-    const h = Math.floor(diff / 3600000);
-    const d = Math.floor(h / 24);
-    if (d > 0) return `il y a ${d}j`;
-    if (h > 0) return `il y a ${h}h`;
-    return 'récemment';
-  }
+function secToMin(s) {
+  return `${Math.floor(s/60)}m${String(s%60).padStart(2,'0')}s`;
+}
 
-  async function runAnalysis() {
-    const count = parseInt(document.getElementById('gameCount').value) || 20;
-    const btn   = document.getElementById('analyzeBtn');
-    btn.disabled = true;
-    document.getElementById('results').style.display = 'none';
+function timeAgo(ts) {
+  const diff = Date.now() - ts;
+  const h = Math.floor(diff / 3600000);
+  const d = Math.floor(h / 24);
+  if (d > 0) return `il y a ${d}j`;
+  if (h > 0) return `il y a ${h}h`;
+  return 'récemment';
+}
 
-    try {
-      setStatus('⏳ Récupération du compte…');
-      const account = await fetchRiot(`${RIOT_EU}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(GAME_NAME)}/${encodeURIComponent(TAG_LINE)}`);
-      const puuid = account.puuid;
+function color(val, good, bad, reverse = false) {
+  if (reverse) { const t = good; good = bad; bad = t; }
+  if (val >= good) return 'var(--win)';
+  if (val <= bad)  return 'var(--loss)';
+  return 'var(--warn)';
+}
 
-      setStatus('⏳ Récupération des IDs de parties…');
-      const matchIds = await fetchRiot(`${RIOT_EU}/lol/match/v5/matches/by-puuid/${puuid}/ids?queue=420&type=ranked&start=0&count=${count}`);
+async function runAnalysis() {
+  const count = parseInt(document.getElementById('gameCount').value) || 20;
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  document.getElementById('results').style.display = 'none';
 
-      if (!matchIds.length) { setStatus('Aucune partie ranked trouvée.', true); btn.disabled = false; return; }
+  try {
+    setStatus('⏳ Récupération du compte…');
+    const account = await fetchRiot(`${RIOT_EU}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(GAME_NAME)}/${encodeURIComponent(TAG_LINE)}`);
+    const puuid = account.puuid;
 
-      setStatus(`⏳ Chargement de ${matchIds.length} parties…`);
-      const matches = [];
-      for (let i = 0; i < matchIds.length; i += 2) {
-        const batch = matchIds.slice(i, i + 2).map(id => fetchRiot(`${RIOT_EU}/lol/match/v5/matches/${id}`));
-        matches.push(...await Promise.all(batch));
-        setStatus(`⏳ ${matches.length} / ${matchIds.length} parties chargées…`);
-        if (i + 2 < matchIds.length) await new Promise(r => setTimeout(r, 550));
-      }
+    setStatus('⏳ Récupération des IDs de parties…');
+    const matchIds = await fetchRiot(`${RIOT_EU}/lol/match/v5/matches/by-puuid/${puuid}/ids?queue=420&type=ranked&start=0&count=${count}`);
 
-      setStatus('✅ Analyse terminée !');
-      renderResults(matches, puuid);
+    if (!matchIds.length) { setStatus('Aucune partie ranked trouvée.', true); btn.disabled = false; return; }
 
-    } catch (e) {
-      setStatus(`Erreur : ${e.message}`, true);
-    }
-    btn.disabled = false;
-  }
-
-  function renderResults(matches, puuid) {
-    const games = matches.map(m => {
-      const p = m.info.participants.find(x => x.puuid === puuid);
-      return {
-        champion: p.championName, win: p.win,
-        kills: p.kills, deaths: p.deaths, assists: p.assists,
-        cs: p.totalMinionsKilled + p.neutralMinionsKilled,
-        duration: m.info.gameDuration * 1000,
-        timestamp: m.info.gameStartTimestamp,
-      };
-    }).sort((a, b) => b.timestamp - a.timestamp);
-
-    const wins = games.filter(g => g.win).length;
-    const losses = games.length - wins;
-    const wr = Math.round((wins / games.length) * 100);
-    const avgKda = (games.reduce((s, g) => s + (g.deaths === 0 ? (g.kills + g.assists) : (g.kills + g.assists) / g.deaths), 0) / games.length).toFixed(2);
-    const avgCs = Math.round(games.reduce((s, g) => s + g.cs, 0) / games.length);
-
-    let maxLossStreak = 0, curLoss = 0;
-    games.forEach(g => { if (!g.win) { curLoss++; maxLossStreak = Math.max(maxLossStreak, curLoss); } else curLoss = 0; });
-
-    let currentStreak = 0, currentStreakType = games[0]?.win ? 'W' : 'L';
-    for (const g of games) {
-      if ((g.win && currentStreakType === 'W') || (!g.win && currentStreakType === 'L')) currentStreak++;
-      else break;
+    setStatus(`⏳ Chargement de ${matchIds.length} parties…`);
+    const matches = [];
+    for (let i = 0; i < matchIds.length; i += 2) {
+      const batch = matchIds.slice(i, i + 2).map(id => fetchRiot(`${RIOT_EU}/lol/match/v5/matches/${id}`));
+      matches.push(...await Promise.all(batch));
+      setStatus(`⏳ ${matches.length} / ${matchIds.length} parties chargées…`);
+      if (i + 2 < matchIds.length) await new Promise(r => setTimeout(r, 550));
     }
 
-    const champMap = {};
-    games.forEach(g => {
-      if (!champMap[g.champion]) champMap[g.champion] = { wins:0, games:0, kills:0, deaths:0, assists:0, cs:0 };
-      const c = champMap[g.champion];
-      c.games++; if (g.win) c.wins++;
-      c.kills += g.kills; c.deaths += g.deaths; c.assists += g.assists; c.cs += g.cs;
-    });
-    const champs = Object.entries(champMap).sort((a, b) => b[1].games - a[1].games);
+    setStatus('✅ Analyse terminée !');
+    renderResults(matches, puuid);
+  } catch (e) {
+    setStatus(`Erreur : ${e.message}`, true);
+  }
+  btn.disabled = false;
+}
 
-    const reversed = [...games].reverse();
-    const lpPoints = [];
-    let lp = 0;
-    reversed.forEach(g => { lp += g.win ? 18 : -15; lpPoints.push(lp); });
+function renderResults(matches, puuid) {
+  // ── Extract ──
+  const games = matches.map(m => {
+    const p = m.info.participants.find(x => x.puuid === puuid);
+    const teamId = p.teamId;
+    const teamKills = m.info.participants.filter(x => x.teamId === teamId).reduce((s, x) => s + x.kills, 0);
+    const teamDmg   = m.info.participants.filter(x => x.teamId === teamId).reduce((s, x) => s + x.totalDamageDealtToChampions, 0);
+    const durationMin = m.info.gameDuration / 60;
+    return {
+      champion: p.championName,
+      role: p.teamPosition || p.individualPosition || 'UNKNOWN',
+      win: p.win,
+      kills: p.kills, deaths: p.deaths, assists: p.assists,
+      cs: p.totalMinionsKilled + p.neutralMinionsKilled,
+      csPerMin: ((p.totalMinionsKilled + p.neutralMinionsKilled) / durationMin),
+      vision: p.visionScore,
+      damage: p.totalDamageDealtToChampions,
+      dmgPerMin: p.totalDamageDealtToChampions / durationMin,
+      killParticipation: teamKills > 0 ? Math.round(((p.kills + p.assists) / teamKills) * 100) : 0,
+      damageShare: teamDmg > 0 ? Math.round((p.totalDamageDealtToChampions / teamDmg) * 100) : 0,
+      duration: m.info.gameDuration,
+      timestamp: m.info.gameStartTimestamp,
+      hour: new Date(m.info.gameStartTimestamp).getHours(),
+    };
+  }).sort((a, b) => b.timestamp - a.timestamp);
 
-    const advice = [];
-    if (wr < 45) advice.push('Winrate sous 45% — considère une pause ou des sessions off-stream pour reset.');
-    if (maxLossStreak >= 3) advice.push(`${maxLossStreak} défaites consécutives détectées. Règle des 2 défaites : stop dès la 2ème d'affilée.`);
-    if (avgCs < 180) advice.push(`CS moyen ${avgCs} — vise 8+ CS/min. C'est probablement ton levier de progression le plus rapide à ce stade.`);
-    const top = champs[0];
-    if (top && top[1].wins / top[1].games < 0.45 && top[1].games >= 3)
-      advice.push(`${top[0]} à ${Math.round(top[1].wins / top[1].games * 100)}% WR sur ${top[1].games} games — envisage un switch ou un changement de build.`);
-    if (currentStreakType === 'L' && currentStreak >= 2)
-      advice.push(`Série actuelle de ${currentStreak} défaites — stop pour aujourd'hui.`);
-    if (!advice.length) advice.push('Aucun signal de tilt détecté — tu joues de façon régulière sur cet échantillon.');
+  // ── Global stats ──
+  const n = games.length;
+  const wins = games.filter(g => g.win).length;
+  const losses = n - wins;
+  const wr = Math.round((wins / n) * 100);
+  const avgKda = (games.reduce((s,g) => s + (g.deaths===0 ? (g.kills+g.assists) : (g.kills+g.assists)/g.deaths), 0) / n);
+  const avgCs = Math.round(games.reduce((s,g) => s + g.cs, 0) / n);
+  const avgCsMin = (games.reduce((s,g) => s + g.csPerMin, 0) / n);
+  const avgVision = Math.round(games.reduce((s,g) => s + g.vision, 0) / n);
+  const avgKP = Math.round(games.reduce((s,g) => s + g.killParticipation, 0) / n);
+  const avgDmgShare = Math.round(games.reduce((s,g) => s + g.damageShare, 0) / n);
+  const avgDmgMin = Math.round(games.reduce((s,g) => s + g.dmgPerMin, 0) / n);
+  const avgDeathsPer10 = ((games.reduce((s,g) => s + g.deaths, 0) / n) / (games.reduce((s,g) => s + g.duration, 0) / n / 60) * 10);
 
-    let tiltLevel = 'ok', tiltMsg = `✓ Aucun signe de tilt — WR ${wr}%, tu joues régulièrement.`;
-    if (wr < 45 || maxLossStreak >= 4) { tiltLevel = 'danger'; tiltMsg = `⚠ Tilt probable — ${maxLossStreak} défaites consécutives max, WR ${wr}%. Pause recommandée.`; }
-    else if (wr < 50 || maxLossStreak >= 3) { tiltLevel = 'warning'; tiltMsg = `~ Attention — WR ${wr}%, streak négatif max de ${maxLossStreak}. Surveille la prochaine session.`; }
+  // ── Streaks ──
+  let maxLossStreak = 0, curLoss = 0;
+  let maxWinStreak  = 0, curWin  = 0;
+  games.forEach(g => {
+    if (!g.win) { curLoss++; maxLossStreak = Math.max(maxLossStreak, curLoss); curWin = 0; }
+    else        { curWin++;  maxWinStreak  = Math.max(maxWinStreak,  curWin);  curLoss = 0; }
+  });
+  let currentStreak = 0, currentStreakType = games[0]?.win ? 'W' : 'L';
+  for (const g of games) {
+    if ((g.win && currentStreakType==='W') || (!g.win && currentStreakType==='L')) currentStreak++;
+    else break;
+  }
 
-    document.getElementById('results').innerHTML = `
-      <div class="summary">
-        <div class="stat-box"><div class="val">${games.length}</div><div class="lbl">Parties</div></div>
-        <div class="stat-box"><div class="val win-color">${wins}W</div><div class="lbl">Victoires</div></div>
-        <div class="stat-box"><div class="val loss-color">${losses}L</div><div class="lbl">Défaites</div></div>
-        <div class="stat-box"><div class="val" style="color:${wr>=50?'var(--win)':wr>=45?'#fbbf24':'var(--loss)'}">${wr}%</div><div class="lbl">Winrate</div></div>
-        <div class="stat-box"><div class="val">${avgKda}</div><div class="lbl">KDA moyen</div></div>
-        <div class="stat-box"><div class="val">${avgCs}</div><div class="lbl">CS moyen</div></div>
-        <div class="stat-box"><div class="val" style="color:${currentStreakType==='W'?'var(--win)':'var(--loss)'}">${currentStreakType==='W'?'+':'-'}${currentStreak}</div><div class="lbl">Streak actuel</div></div>
-        <div class="stat-box"><div class="val loss-color">${maxLossStreak}</div><div class="lbl">Pire série L</div></div>
+  // ── Tilt pattern: winrate after N consecutive losses ──
+  const afterLoss = {};
+  for (let i = 1; i < games.length; i++) {
+    let streak = 0;
+    for (let j = i - 1; j >= 0 && !games[j].win; j--) streak++;
+    if (streak >= 1) {
+      if (!afterLoss[streak]) afterLoss[streak] = { wins:0, total:0 };
+      afterLoss[streak].wins  += games[i].win ? 1 : 0;
+      afterLoss[streak].total += 1;
+    }
+  }
+
+  // ── Tilt pattern: winrate by hour ──
+  const hourMap = {};
+  games.forEach(g => {
+    if (!hourMap[g.hour]) hourMap[g.hour] = { wins:0, total:0 };
+    hourMap[g.hour].wins  += g.win ? 1 : 0;
+    hourMap[g.hour].total += 1;
+  });
+  const hours = Object.entries(hourMap).sort((a,b) => Number(a[0]) - Number(b[0]));
+
+  // ── LP estimation ──
+  const reversed = [...games].reverse();
+  const lpPoints = [];
+  let lp = 0;
+  reversed.forEach(g => { lp += g.win ? 18 : -15; lpPoints.push(lp); });
+
+  // ── Champion breakdown ──
+  const champMap = {};
+  games.forEach(g => {
+    if (!champMap[g.champion]) champMap[g.champion] = { wins:0, games:0, kills:0, deaths:0, assists:0, cs:0, csMin:0, vision:0, kp:0, dmgMin:0 };
+    const c = champMap[g.champion];
+    c.games++; if (g.win) c.wins++;
+    c.kills+=g.kills; c.deaths+=g.deaths; c.assists+=g.assists;
+    c.cs+=g.cs; c.csMin+=g.csPerMin; c.vision+=g.vision; c.kp+=g.killParticipation; c.dmgMin+=g.dmgPerMin;
+  });
+  const champs = Object.entries(champMap).sort((a,b) => b[1].games - a[1].games);
+
+  // ── Role breakdown ──
+  const roleMap = {};
+  games.forEach(g => {
+    if (!roleMap[g.role]) roleMap[g.role] = { wins:0, games:0 };
+    roleMap[g.role].games++; if (g.win) roleMap[g.role].wins++;
+  });
+
+  // ── Tilt level ──
+  let tiltLevel = 'ok', tiltMsg = `✓ Aucun signe de tilt détecté — WR ${wr}%, tu joues régulièrement sur cet échantillon.`;
+  if (wr < 45 || maxLossStreak >= 4) {
+    tiltLevel = 'danger';
+    tiltMsg = `⚠ Tilt probable — pire série de ${maxLossStreak} défaites consécutives, WR global ${wr}%. Une pause s'impose avant de relancer une session.`;
+  } else if (wr < 50 || maxLossStreak >= 3) {
+    tiltLevel = 'warning';
+    tiltMsg = `~ Attention — WR ${wr}%, streak négatif max de ${maxLossStreak}. Surveille tes prochaines sessions de près.`;
+  }
+
+  // ── Coach advice generator ──
+  const coachItems = [];
+
+  // CS
+  if (avgCsMin < 7.0) {
+    coachItems.push({ prio:'high', icon:'🌾', title:'CS en dessous de la cible Emeraude', body:`Tu fais en moyenne ${avgCsMin.toFixed(1)} CS/min contre une cible de 7.8+ en Emeraude. C'est souvent la source n°1 de retard d'or en ADC. Travaille la gestion de vague en custom : objective freeze, slow push et reset timing. Chaque CS à 20min vaut ~20 LP en termes d'impact.` });
+  } else if (avgCsMin < 8.0) {
+    coachItems.push({ prio:'medium', icon:'🌾', title:'CS correct mais améliorable', body:`${avgCsMin.toFixed(1)} CS/min c'est dans la moyenne Emeraude, mais viser 8.5+ te donnera un avantage sérieux. Concentre-toi sur le reset timing et ne sacrifice jamais un wave de CS pour un kill peu décisif.` });
+  }
+
+  // Vision
+  if (avgVision < 18) {
+    coachItems.push({ prio:'high', icon:'👁', title:'Vision score trop bas pour ton elo', body:`${avgVision} de vision score moyen c'est en dessous de la moyenne Emeraude (≈21). En tant qu'ADC, placer des wards dans les tribushes bot/mid et deeplinking lors des push de vague est essentiel pour ta survie. Ça coûte 0 gold et évite des morts gratuites.` });
+  } else if (avgVision < 22) {
+    coachItems.push({ prio:'medium', icon:'👁', title:'Vision dans la moyenne — peut être optimisé', body:`${avgVision} de vision score, c'est correct. Pour passer au niveau supérieur, pense à sweeper avant chaque objectif (Dragon, Baron) et à utiliser une Control Ward systématiquement à chaque recall.` });
+  }
+
+  // Kill participation
+  if (avgKP < 55) {
+    coachItems.push({ prio:'high', icon:'⚔️', title:'Participation aux kills trop faible', body:`${avgKP}% de kill participation c'est significativement bas. Ça indique que tu es souvent isolé ou que tu ne follow pas les rotations de ton équipe. En ADC, après avoir clear ta vague, rejoins systématiquement ton équipe pour les objectifs ou les trades mid.` });
+  } else if (avgKP < 62) {
+    coachItems.push({ prio:'medium', icon:'⚔️', title:'Kill participation dans la moyenne', body:`${avgKP}% de KP. Tu es présent sur une bonne partie des kills mais il y a de la marge. Identifier les moments où tu peux rotater sans perdre trop de CS est la clé pour monter ce chiffre.` });
+  }
+
+  // Deaths
+  if (avgDeathsPer10 > 3.5) {
+    coachItems.push({ prio:'high', icon:'💀', title:'Trop de morts — positionnement à retravailler', body:`${avgDeathsPer10.toFixed(1)} morts/10min, au-dessus de la cible Emeraude (≈2.8). En ADC c'est particulièrement coûteux car tu es la source de DPS principale. Analyse tes morts : sont-elles dues à un mauvais positionnement en teamfight, un mauvais warding, ou des dives mal lues ?` });
+  }
+
+  // Damage share
+  if (avgDmgShare < 22) {
+    coachItems.push({ prio:'medium', icon:'💥', title:'Part de dégâts d\'équipe en dessous de la cible', body:`${avgDmgShare}% de damage share (cible ADC ≈26%). Tu deals moins que ton attendu. Vérifie ton build, tes runes et ta priorité de cibles en teamfight. L'ADC doit cibler les unités qui s'approchent, pas s'exposer pour taper le carry ennemi.` });
+  }
+
+  // Tilt pattern
+  if (maxLossStreak >= 3) {
+    coachItems.push({ prio:'high', icon:'🧠', title:`Règle des 2 défaites — streak max détecté : ${maxLossStreak}L`, body:`Tu as enchaîné jusqu'à ${maxLossStreak} défaites consécutives sur cet échantillon. Les données montrent que le winrate chute fortement après 2 défaites d'affilée. Applique une règle stricte : stop automatique après 2 losses dans la même session, quelle que soit l'heure. Reviens le lendemain avec un mental frais.` });
+  }
+
+  // Hour pattern
+  const badHours = hours.filter(([h, s]) => s.total >= 2 && (s.wins/s.total) < 0.35);
+  if (badHours.length > 0) {
+    const hList = badHours.map(([h]) => `${h}h-${parseInt(h)+1}h`).join(', ');
+    coachItems.push({ prio:'medium', icon:'🕐', title:'Créneaux horaires à risque identifiés', body:`Ton WR est significativement plus bas sur ces créneaux : ${hList}. C'est souvent lié à la fatigue ou à la qualité des lobbies à ces heures. Évite de lancer des sessions ranked à ces horaires, ou sois particulièrement strict sur ta règle de stop.` });
+  }
+
+  // Best/worst champ
+  const worstChamp = champs.filter(([,s]) => s.games >= 3).sort((a,b) => (a[1].wins/a[1].games) - (b[1].wins/b[1].games))[0];
+  if (worstChamp && worstChamp[1].wins/worstChamp[1].games < 0.40) {
+    coachItems.push({ prio:'medium', icon:'🎯', title:`${worstChamp[0]} sous-performe sur ${worstChamp[1].games} games`, body:`${Math.round(worstChamp[1].wins/worstChamp[1].games*100)}% WR sur ${worstChamp[1].games} parties. Si tu continues à le jouer, analyse spécifiquement tes parties perdues : est-ce un problème de matchup, de build, ou de game state reading ? Sinon, envisage de le bannir de ton pool le temps de stabiliser ton elo.` });
+  }
+
+  if (!coachItems.length) {
+    coachItems.push({ prio:'low', icon:'✅', title:'Stats solides sur cet échantillon', body:'Ton profil est cohérent avec Emeraude. Continue à travailler la régularité plutôt que de chercher à tout optimiser en même temps.' });
+  }
+
+  // ── BUILD HTML ──
+  document.getElementById('results').innerHTML = `
+
+    <div class="section-title">Vue d'ensemble — ${n} parties SoloQ</div>
+    <div class="summary">
+      <div class="stat-box"><div class="val" style="color:${wr>=50?'var(--win)':wr>=45?'var(--warn)':'var(--loss)'}">${wr}%</div><div class="lbl">Winrate</div></div>
+      <div class="stat-box"><div class="val" style="color:var(--win)">${wins}W</div><div class="lbl">Victoires</div></div>
+      <div class="stat-box"><div class="val" style="color:var(--loss)">${losses}L</div><div class="lbl">Défaites</div></div>
+      <div class="stat-box"><div class="val" style="color:${color(avgKda,3.5,2.5)}">${avgKda.toFixed(2)}</div><div class="lbl">KDA moy.</div></div>
+      <div class="stat-box"><div class="val" style="color:${color(avgCsMin,8,6.5)}">${avgCsMin.toFixed(1)}</div><div class="lbl">CS/min</div></div>
+      <div class="stat-box"><div class="val" style="color:${color(avgVision,24,16)}">${avgVision}</div><div class="lbl">Vision moy.</div></div>
+      <div class="stat-box"><div class="val" style="color:${color(avgKP,65,50)}">${avgKP}%</div><div class="lbl">Kill Part.</div></div>
+      <div class="stat-box"><div class="val" style="color:${currentStreakType==='W'?'var(--win)':'var(--loss)'}">${currentStreakType==='W'?'+':'-'}${currentStreak}</div><div class="lbl">Streak</div></div>
+    </div>
+
+    <div class="tilt-alert ${tiltLevel}">${tiltMsg}</div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(event,'tab-coach')">🎓 Coach</button>
+      <button class="tab-btn" onclick="switchTab(event,'tab-tilt')">🧠 Tilt & Patterns</button>
+      <button class="tab-btn" onclick="switchTab(event,'tab-champs')">🏆 Champions</button>
+      <button class="tab-btn" onclick="switchTab(event,'tab-stats')">📊 Stats avancées</button>
+      <button class="tab-btn" onclick="switchTab(event,'tab-bench')">⚖️ Benchmark elo</button>
+      <button class="tab-btn" onclick="switchTab(event,'tab-history')">📋 Historique</button>
+    </div>
+
+    <!-- TAB COACH -->
+    <div class="tab-panel active" id="tab-coach">
+      ${coachItems.map(item => `
+        <div class="coach-block">
+          <h3><span class="badge">${item.icon}</span>${item.title}<span class="prio ${item.prio}">${item.prio === 'high' ? 'Priorité haute' : item.prio === 'medium' ? 'À travailler' : 'Bon point'}</span></h3>
+          <div style="font-size:14px;color:rgba(232,244,255,0.75);line-height:1.7;">${item.body}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- TAB TILT -->
+    <div class="tab-panel" id="tab-tilt">
+      <div class="tilt-grid">
+        <div class="tilt-card">
+          <h4>Séquence W/L</h4>
+          <div class="streak-row">${games.map(g => `<div class="streak-pip ${g.win?'W':'L'}">${g.win?'W':'L'}</div>`).join('')}</div>
+          <p style="font-size:12px;color:var(--muted);margin-top:10px;">Pire série : <strong style="color:var(--loss)">${maxLossStreak}L</strong> &nbsp;·&nbsp; Meilleure série : <strong style="color:var(--win)">${maxWinStreak}W</strong></p>
+        </div>
+        <div class="tilt-card">
+          <h4>WR après N défaites consécutives</h4>
+          <div class="after-loss-row" style="font-size:11px;color:var(--muted);padding-bottom:6px;"><span>Contexte</span><span>WR game suivante</span></div>
+          ${Object.entries(afterLoss).sort((a,b)=>Number(a[0])-Number(b[0])).map(([streak, s]) => {
+            const wr2 = Math.round(s.wins/s.total*100);
+            return `<div class="after-loss-row">
+              <span class="after-loss-label">Après ${streak} défaite${streak>1?'s':''} d'affilée</span>
+              <span class="after-loss-wr" style="color:${wr2>=50?'var(--win)':wr2>=40?'var(--warn)':'var(--loss)'}">${wr2}% <span style="font-size:10px;font-family:Rajdhani;font-weight:400;color:var(--muted)">(${s.total} cas)</span></span>
+            </div>`;
+          }).join('') || '<p style="color:var(--muted);font-size:13px">Pas assez de données</p>'}
+        </div>
+        <div class="tilt-card" style="grid-column:1/-1">
+          <h4>Winrate par heure de début de partie</h4>
+          <div class="hour-bar-wrap">
+            ${hours.map(([h, s]) => {
+              const wr2 = Math.round(s.wins/s.total*100);
+              const barColor = wr2 >= 55 ? 'var(--win)' : wr2 >= 45 ? 'var(--warn)' : 'var(--loss)';
+              return `<div class="hour-bar-row">
+                <span class="hour-label">${h}h – ${(parseInt(h)+1)%24}h</span>
+                <div class="hour-bar-bg"><div class="hour-bar-fill" style="width:${wr2}%;background:${barColor}"></div></div>
+                <span class="hour-stat">${wr2}% (${s.total}g)</span>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
       </div>
-
-      <div class="tilt-alert ${tiltLevel}">${tiltMsg}</div>
-
-      <div class="section-title">Séquence W/L (du + récent au + ancien)</div>
-      <div class="streak-row">${games.map(g => `<div class="streak-pip ${g.win?'W':'L'}">${g.win?'W':'L'}</div>`).join('')}</div>
-
-      <div class="section-title">Évolution LP estimée</div>
-      <div class="lp-chart-wrap"><canvas id="lpChart"></canvas></div>
-
-      <div class="section-title">Champions joués</div>
-      <div class="champ-grid">${champs.map(([name, s]) => {
-        const cwr = Math.round(s.wins / s.games * 100);
-        const ckda = s.deaths === 0 ? '∞' : ((s.kills + s.assists) / s.deaths).toFixed(2);
-        return `<div class="champ-card">
-          <div class="champ-name">${name}</div>
-          <div class="champ-wr" style="color:${cwr>=55?'var(--win)':cwr>=45?'#fbbf24':'var(--loss)'}">${cwr}%</div>
-          <div class="champ-stats"><strong>${s.wins}W</strong>/${s.games-s.wins}L · ${s.games} games<br>KDA <strong>${ckda}</strong> · CS/g <strong>${Math.round(s.cs/s.games)}</strong></div>
-        </div>`;
-      }).join('')}</div>
-
-      <div class="section-title">Historique des parties</div>
-      <div class="match-list">${games.map(g => `
-        <div class="match-row ${g.win?'win':'loss'}">
-          <div class="match-pip"></div>
-          <div class="match-champ">${g.champion}</div>
-          <div class="match-result">${g.win?'VICTOIRE':'DÉFAITE'}</div>
-          <div class="match-kda">${g.kills}/${g.deaths}/${g.assists}</div>
-          <div class="match-cs">${g.cs} CS</div>
-          <div class="match-dur">${msToMin(g.duration)}</div>
-          <div class="match-ago">${timeAgo(g.timestamp)}</div>
-        </div>`).join('')}</div>
-
-      <div class="advice-box">
-        <h3>Recommandations</h3>
-        <ul>${advice.map(a => `<li>${a}</li>`).join('')}</ul>
+      <div class="chart-wrap" style="margin-top:12px">
+        <p style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:.15em;color:var(--blue);margin-bottom:14px">ÉVOLUTION LP ESTIMÉE</p>
+        <canvas id="lpChart" height="160"></canvas>
       </div>
-    `;
+    </div>
 
-    document.getElementById('results').style.display = 'block';
+    <!-- TAB CHAMPS -->
+    <div class="tab-panel" id="tab-champs">
+      ${Object.keys(roleMap).length > 1 ? `
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          ${Object.entries(roleMap).map(([role, s]) => {
+            const rwr = Math.round(s.wins/s.games*100);
+            return `<div style="background:var(--blue-dim);border:1px solid var(--blue-border);border-radius:3px;padding:10px 16px;font-size:13px">
+              <span style="font-family:'Orbitron',monospace;font-size:10px;color:var(--blue);letter-spacing:.1em">${role}</span>
+              <span style="margin-left:12px;font-weight:700;color:${rwr>=50?'var(--win)':'var(--loss)'}">${rwr}%</span>
+              <span style="color:var(--muted);font-size:12px;margin-left:6px">${s.games}g</span>
+            </div>`;
+          }).join('')}
+        </div>` : ''}
+      <div class="champ-grid">
+        ${champs.map(([name, s]) => {
+          const cwr  = Math.round(s.wins/s.games*100);
+          const ckda = s.deaths===0 ? '∞' : ((s.kills+s.assists)/s.deaths).toFixed(2);
+          const ccs  = (s.csMin/s.games).toFixed(1);
+          const ckp  = Math.round(s.kp/s.games);
+          const cvs  = Math.round(s.vision/s.games);
+          return `<div class="champ-card">
+            <div class="champ-header">
+              <div class="champ-name">${name}</div>
+              <div class="champ-wr" style="color:${cwr>=55?'var(--win)':cwr>=45?'var(--warn)':'var(--loss)'}">${cwr}%</div>
+            </div>
+            <div class="champ-row"><span>Parties</span><strong>${s.games}g (${s.wins}W/${s.games-s.wins}L)</strong></div>
+            <div class="champ-row"><span>KDA</span><strong style="color:${color(parseFloat(ckda)||0,3.5,2.5)}">${ckda}</strong></div>
+            <div class="champ-row"><span>CS/min</span><strong style="color:${color(parseFloat(ccs),8,6.5)}">${ccs}</strong></div>
+            <div class="champ-row"><span>Kill Part.</span><strong style="color:${color(ckp,65,50)}">${ckp}%</strong></div>
+            <div class="champ-row"><span>Vision</span><strong style="color:${color(cvs,24,16)}">${cvs}</strong></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
 
-    // ── LP Chart ──
-    const canvas = document.getElementById('lpChart');
+    <!-- TAB STATS AVANCÉES -->
+    <div class="tab-panel" id="tab-stats">
+      <div class="adv-grid">
+        <div class="adv-card">
+          <h4>Dégâts / minute</h4>
+          <div class="adv-val">${avgDmgMin.toLocaleString()}</div>
+          <div class="adv-sub">Cible Emeraude ADC : ~580</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgDmgMin/8)}%;background:${color(avgDmgMin,580,400)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>Part des dégâts équipe</h4>
+          <div class="adv-val">${avgDmgShare}%</div>
+          <div class="adv-sub">Cible ADC : ~26%</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgDmgShare*2.5)}%;background:${color(avgDmgShare,26,18)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>Kill Participation</h4>
+          <div class="adv-val">${avgKP}%</div>
+          <div class="adv-sub">Cible Emeraude ADC : ~62%</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgKP)}%;background:${color(avgKP,62,50)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>Vision Score moyen</h4>
+          <div class="adv-val">${avgVision}</div>
+          <div class="adv-sub">Cible Emeraude : ~21</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgVision/35*100)}%;background:${color(avgVision,21,15)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>CS / minute</h4>
+          <div class="adv-val">${avgCsMin.toFixed(1)}</div>
+          <div class="adv-sub">Cible Emeraude ADC : ~7.8</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgCsMin/12*100)}%;background:${color(avgCsMin,7.8,6.5)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>Morts / 10 minutes</h4>
+          <div class="adv-val">${avgDeathsPer10.toFixed(1)}</div>
+          <div class="adv-sub">Cible : &lt;2.8/10min</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgDeathsPer10/6*100)}%;background:${color(avgDeathsPer10,2.8,3.8,true)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>KDA moyen</h4>
+          <div class="adv-val">${avgKda.toFixed(2)}</div>
+          <div class="adv-sub">Cible Emeraude : ~3.2</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:${Math.min(100,avgKda/6*100)}%;background:${color(avgKda,3.5,2.5)}"></div></div>
+        </div>
+        <div class="adv-card">
+          <h4>Durée moy. des parties</h4>
+          <div class="adv-val">${secToMin(Math.round(games.reduce((s,g)=>s+g.duration,0)/n))}</div>
+          <div class="adv-sub">Toutes parties confondues</div>
+          <div class="adv-bar-bg"><div class="adv-bar-fill" style="width:60%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB BENCHMARK -->
+    <div class="tab-panel" id="tab-bench">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">Comparaison avec les moyennes <strong style="color:var(--white)">Emeraude (ADC)</strong> — données de référence basées sur les statistiques publiques agrégées. Les couleurs indiquent si tu es au-dessus <span style="color:var(--win)">■</span>, dans la zone <span style="color:var(--warn)">■</span> ou en dessous <span style="color:var(--loss)">■</span>.</p>
+      <div class="bench-grid">
+        ${[
+          { label:'KDA', you: avgKda.toFixed(2), avg: EMERALD_BENCH.kda, raw: avgKda, good:3.5, bad:2.5, unit:'' },
+          { label:'CS / min', you: avgCsMin.toFixed(1), avg: EMERALD_BENCH.csPerMin, raw: avgCsMin, good:8, bad:6.5, unit:'' },
+          { label:'Vision Score', you: avgVision, avg: EMERALD_BENCH.vision, raw: avgVision, good:24, bad:16, unit:'' },
+          { label:'Kill Participation', you: avgKP+'%', avg: EMERALD_BENCH.killParticipation+'%', raw: avgKP, good:65, bad:50, unit:'%' },
+          { label:'Damage Share', you: avgDmgShare+'%', avg: EMERALD_BENCH.damageShare+'%', raw: avgDmgShare, good:26, bad:18, unit:'%' },
+          { label:'Dégâts / min', you: avgDmgMin, avg: EMERALD_BENCH.dmgPerMin, raw: avgDmgMin, good:600, bad:450, unit:'' },
+          { label:'Morts / 10min', you: avgDeathsPer10.toFixed(1), avg: EMERALD_BENCH.deathsPer10, raw: avgDeathsPer10, good:2.5, bad:3.5, unit:'', reverse:true },
+        ].map(m => {
+          const delta = typeof m.raw === 'number' ? (m.raw - parseFloat(m.avg)).toFixed(2) : 0;
+          const deltaNum = parseFloat(delta);
+          const isReverse = m.reverse;
+          const deltaClass = (isReverse ? deltaNum < 0 : deltaNum > 0) ? 'pos' : deltaNum === 0 ? 'neu' : 'neg';
+          const c = color(m.raw, m.good, m.bad, isReverse);
+          return `<div class="bench-card">
+            <h4>${m.label}</h4>
+            <div class="bench-row">
+              <span class="bench-metric">Toi</span>
+              <span style="font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:${c}">${m.you}</span>
+            </div>
+            <div class="bench-row">
+              <span class="bench-metric">Moy. Emeraude</span>
+              <span style="font-family:'Orbitron',monospace;font-size:14px;color:var(--muted)">${m.avg}</span>
+            </div>
+            <div class="bench-row">
+              <span class="bench-metric">Écart</span>
+              <span class="bench-delta ${deltaClass}">${deltaNum > 0 ? '+' : ''}${delta}${m.unit}</span>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- TAB HISTORY -->
+    <div class="tab-panel" id="tab-history">
+      <div class="match-list">
+        ${games.map(g => `
+          <div class="match-row ${g.win?'win':'loss'}">
+            <div class="match-pip"></div>
+            <div class="match-champ">${g.champion}</div>
+            <div class="match-result">${g.win?'VICTOIRE':'DÉFAITE'}</div>
+            <div class="match-role">${g.role}</div>
+            <div class="match-kda">${g.kills}/${g.deaths}/${g.assists}</div>
+            <div class="match-cs">${g.cs} CS · ${g.csPerMin.toFixed(1)}/m</div>
+            <div class="match-dmg">${(g.damage/1000).toFixed(1)}k dmg</div>
+            <div class="match-ago">${timeAgo(g.timestamp)}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('results').style.display = 'block';
+
+  // ── LP Chart ──
+  const canvas = document.getElementById('lpChart');
+  if (canvas) {
     const ctx = canvas.getContext('2d');
     canvas.width = canvas.offsetWidth || 800;
-    canvas.height = 180;
+    canvas.height = 160;
     const pts = lpPoints;
     const minLp = Math.min(...pts), maxLp = Math.max(...pts);
-    const pad = { t:20, r:20, b:30, l:44 };
-    const W = canvas.width - pad.l - pad.r, H = canvas.height - pad.t - pad.b;
+    const pad = {t:16,r:20,b:28,l:44};
+    const W = canvas.width - pad.l - pad.r;
+    const H = canvas.height - pad.t - pad.b;
     const range = (maxLp - minLp) || 1;
     const ptX = i => pad.l + i * (W / (pts.length - 1));
     const ptY = v => pad.t + H - ((v - minLp) / range) * H;
 
-    ctx.strokeStyle = 'rgba(89,191,255,0.08)'; ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(89,191,255,0.07)'; ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
-      const y = pad.t + (H / 4) * i;
-      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + W, y); ctx.stroke();
-      const v = Math.round(maxLp - ((maxLp - minLp) / 4) * i);
-      ctx.fillStyle = 'rgba(232,244,255,0.3)'; ctx.font = '10px Rajdhani'; ctx.textAlign = 'right';
-      ctx.fillText((v >= 0 ? '+' : '') + v, pad.l - 6, y + 4);
+      const y = pad.t + (H/4)*i;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l+W, y); ctx.stroke();
+      const v = Math.round(maxLp - ((maxLp-minLp)/4)*i);
+      ctx.fillStyle='rgba(232,244,255,0.28)'; ctx.font='10px Rajdhani'; ctx.textAlign='right';
+      ctx.fillText((v>=0?'+':'')+v, pad.l-6, y+4);
     }
     if (minLp < 0 && maxLp > 0) {
-      ctx.strokeStyle = 'rgba(89,191,255,0.25)'; ctx.setLineDash([4, 4]);
-      ctx.beginPath(); ctx.moveTo(pad.l, ptY(0)); ctx.lineTo(pad.l + W, ptY(0)); ctx.stroke();
+      ctx.strokeStyle='rgba(89,191,255,0.22)'; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(pad.l, ptY(0)); ctx.lineTo(pad.l+W, ptY(0)); ctx.stroke();
       ctx.setLineDash([]);
     }
-    const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t + H);
-    grad.addColorStop(0, 'rgba(89,191,255,0.25)'); grad.addColorStop(1, 'rgba(89,191,255,0)');
+    const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+H);
+    grad.addColorStop(0,'rgba(89,191,255,0.22)'); grad.addColorStop(1,'rgba(89,191,255,0)');
     ctx.beginPath(); ctx.moveTo(ptX(0), ptY(pts[0]));
-    pts.forEach((v, i) => ctx.lineTo(ptX(i), ptY(v)));
-    ctx.lineTo(ptX(pts.length - 1), pad.t + H); ctx.lineTo(ptX(0), pad.t + H);
-    ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
-    ctx.beginPath(); ctx.strokeStyle = '#59BFFF'; ctx.lineWidth = 2; ctx.lineJoin = 'round';
-    pts.forEach((v, i) => i === 0 ? ctx.moveTo(ptX(i), ptY(v)) : ctx.lineTo(ptX(i), ptY(v)));
+    pts.forEach((v,i) => ctx.lineTo(ptX(i), ptY(v)));
+    ctx.lineTo(ptX(pts.length-1), pad.t+H); ctx.lineTo(ptX(0), pad.t+H);
+    ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+    ctx.beginPath(); ctx.strokeStyle='#59BFFF'; ctx.lineWidth=2; ctx.lineJoin='round';
+    pts.forEach((v,i) => i===0 ? ctx.moveTo(ptX(i),ptY(v)) : ctx.lineTo(ptX(i),ptY(v)));
     ctx.stroke();
-    pts.forEach((v, i) => {
-      ctx.beginPath(); ctx.arc(ptX(i), ptY(v), 4, 0, Math.PI * 2);
+    pts.forEach((v,i) => {
+      ctx.beginPath(); ctx.arc(ptX(i), ptY(v), 3.5, 0, Math.PI*2);
       ctx.fillStyle = reversed[i]?.win ? '#4ade80' : '#f87171'; ctx.fill();
     });
-
-    setStatus('');
   }
+
+  setStatus('');
+}
+
+function switchTab(e, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  // redraw chart if switching to tilt tab
+  if (id === 'tab-tilt') {
+    setTimeout(() => {
+      const c = document.getElementById('lpChart');
+      if (c && c._rendered) return;
+      if (c) c._rendered = true;
+    }, 50);
+  }
+}
 </script>
 </body>
 </html>
